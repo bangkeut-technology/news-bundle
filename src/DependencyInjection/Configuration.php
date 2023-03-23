@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace BangkeutTechnology\Bundle\NewsBundle\DependencyInjection;
 
+use BangkeutTechnology\Bundle\NewsBundle\Entity\Post;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -20,6 +21,10 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('bangkeut_news');
+        $rootNode = $treeBuilder->getRootNode();
+
+        $rootNode->children()
+            ->scalarNode('post_class');
 
         return $treeBuilder;
     }

@@ -21,7 +21,11 @@ class BangkeutTechnologyNewsBundleExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
+
+        $container->setParameter('bt_news.post_class', $config['post_class']);
     }
 }
