@@ -4,12 +4,14 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="BangkeutTechnology\Bundle\NewsBundle\Entity\Post" table="bangkeut_technology_post">
+    <entity name="BangkeutTechnology\Bundle\NewsBundle\Entity\Comment" table="bangkeut_technology_comment">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
             <sequence-generator sequence-name="bangkeut_technology_post_seq" allocation-size="100" initial-value="1" />
         </id>
-        <field name="caption" column="caption" type="string" length="255" nullable="true" />
-        <one-to-many field="comments" target-entity="BangkeutTechnology\Bundle\NewsBundle\Entity\Comment" mapped-by="post" />
+        <field name="content" column="content" type="string" length="255" nullable="false" />
+        <many-to-one field="post" target-entity="BangkeutTechnology\Bundle\NewsBundle\Entity\Post" inversed-by="comments">
+            <join-column name="post_id" referenced-column-name="id" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>
